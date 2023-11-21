@@ -22,24 +22,6 @@ on:
 jobs:
   release:
     name: Deploy
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: deploy test
-        run: |
-          echo "CHANNEL_TYPE: $CHANNEL_TYPE"
-          echo "Environment: $ENVIRONMENT"
-        env:
-          CHANNEL_TYPE: ${{ inputs.channel_type }}
-          ENVIRONMENT: ${{ inputs.environment }}
-      - if: ${{ inputs.channel_type }} == "CHANNEL_A"
-        run: |
-          echo "CHANNEL_TYPE: $CHANNEL_A"
-          echo "Environment: $ENVIRONMENT"
-        env:
-          CHANNEL_TYPE: ${{ inputs.channel_type }}
-          ENVIRONMENT: ${{ inputs.environment }}
-      - if: ${{ inputs.channel_type }} == "CHANNEL_B"
-        uses: ./channel_b.yml
-        with:
-            channel_type: ${{ inputs.channel_type }}
+    uses: ./.github/workflows/channel_b.yaml
+    with:
+      channel_type: ${{ inputs.channel_type }}
