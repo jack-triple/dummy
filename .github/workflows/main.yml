@@ -22,6 +22,6 @@ on:
 jobs:
   release:
     name: Deploy
-    uses: ./.github/workflows/channel_b.yaml@v1
+    uses: ./.github/workflows/channel_b.yaml@${{ github.ref }}
     with:
       channel_type: ${{ inputs.channel_type }}
