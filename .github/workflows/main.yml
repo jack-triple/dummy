@@ -22,6 +22,6 @@ on:
 jobs:
   release:
     name: Deploy
-    uses: ./.github/workflows/channel_b.yaml
+    uses: ./jack-triple/dummy/.github/workflows/channel_b.yaml
     with:
       channel_type: ${{ inputs.channel_type }}
