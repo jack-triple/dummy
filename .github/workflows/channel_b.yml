@@ -12,12 +12,15 @@ jobs:
   release:
     name: Deploy_B_TEST
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: deploy test2
-        run: |
-          echo "CHANNEL_TYPE: $CHANNEL_TYPE"
-          echo "Environment: $ENVIRONMENT"
-        env:
-          CHANNEL_TYPE: ${{ inputs.channel_type }}
-          ENVIRONMENT: ${{ inputs.environment }}
+       - name: deploy test1
+         uses: actions/checkout@v3
+         
+       - name: deploy test2
+         run: |
+           echo "CHANNEL_TYPE: $CHANNEL_TYPE"
+           echo "Environment: $ENVIRONMENT"
+         env:
+           CHANNEL_TYPE: ${{ inputs.channel_type }}
+           ENVIRONMENT: ${{ inputs.environment }}
