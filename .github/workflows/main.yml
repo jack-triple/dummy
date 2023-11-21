@@ -40,6 +40,6 @@ jobs:
           CHANNEL_TYPE: ${{ inputs.channel_type }}
           ENVIRONMENT: ${{ inputs.environment }}
       - if: ${{ inputs.channel_type }} == "CHANNEL_B"
-        run: |
-          echo "CHANNEL_TYPE: $CHANNEL_B"
-          echo "Environment: $ENVIRONMENT"
+        uses: ./channel_b.yml
+        with:
+            channel_type: ${{ inputs.channel_type }}
