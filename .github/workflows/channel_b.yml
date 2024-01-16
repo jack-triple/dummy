@@ -16,7 +16,12 @@ jobs:
     steps:
        - name: deploy test1
          uses: actions/checkout@v3
-         
+       
+       - name: Checkout latest release tag
+         run: |
+            LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+            echo '$LATEST_TAG'
+            
        - name: deploy test2
          run: |
            echo "CHANNEL_TYPE: $CHANNEL_TYPE"
