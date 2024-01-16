@@ -19,9 +19,4 @@ on:
           - staging
           - production
 
-jobs:
-  release:
-    name: Deploy
-    uses: ./.github/workflows/channel_b.yaml@main
-    with:
-      channel_type: ${{ inputs.channel_type }}
+
