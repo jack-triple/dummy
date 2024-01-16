@@ -23,7 +23,7 @@ on:
 jobs:
   release:
     name: Deploy
-    uses: ./.github/workflows/channel_b.yaml
+    uses: ./.github/workflows/channel_b.yml
     with:
       channel_type: ${{ inputs.channel_type }}
           
