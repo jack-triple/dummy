@@ -79,5 +79,5 @@ jobs:
 
       - name: Test
         run: |
-          echo "event head : ${{ github.event.head }}"
-
+          echo "ref_name : $GITHUB_REF_NAME}"
+          echo "SHORT_SHA=${GITHUB_SHA:0:6}"
