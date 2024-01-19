@@ -21,11 +21,28 @@ on:
           - production
 
 jobs:
-  release:
-    name: Deploy
-    uses: ./.github/workflows/channel_b.yml
-    with:
-      channel_type: ${{ inputs.channel_type }}
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Environment Validation
+        run: |
+          CHANNEL="${{ github.event.inputs.channel_type }}"
+          ENVIRONMENT="${{ github.event.inputs.environment }}"
           
+          if [ "$ENVIRONMENT" == "qa" ] && [ "$CHANNEL" == "CHANNEL_A" ]; then
+            echo "Invalid combination: CHANNEL_A cannot use QA environment."
+            exit 1          
+          fi
+          
+          if [ "$ENVIRONMENT" == "staging" ] && [ "$CHANNEL" == "CHANNEL_B" ]; then
+            echo "Invalid combination: CHANNEL_B cannot use Staging environment."
+            exit 1          
+          fi
+    
+  
+          
+           
+
 
 
