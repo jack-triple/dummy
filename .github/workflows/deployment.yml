@@ -39,7 +39,29 @@ jobs:
             echo "Invalid combination: CHANNEL_B cannot use Staging environment."
             exit 1          
           fi
-    
+
+      - name: Create GitHub Tag and Release
+        run: |
+          if [ "${{ github.event.inputs.environment }}" == 'development' ]; then
+            TAG_NAME="release-dev"
+          elif [ "${{ github.event.inputs.environment }}" == 'qa' ]; then
+            TAG_NAME="release-qa"
+          elif [ "${{ github.event.inputs.environment }}" == 'staging' ]; then
+            TAG_NAME="release-staging"
+          elif [ "${{ github.event.inputs.environment }}" == 'production' ]; then
+            TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            TAG_NAME="release-prod-$TIMESTAMP"
+          else
+            echo "Invalid environment specified."
+            exit 1
+          fi
+          
+          echo "TAG_NAME=&TAG_NAME" >> $GITHUB_ENV
+
+      - name: Create GitHub Tag and Release2
+        run: |
+          echo "TAG_NAME: $TAG_NAME"
+
   
           
            
