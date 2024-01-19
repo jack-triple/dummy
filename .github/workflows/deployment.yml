@@ -56,7 +56,7 @@ jobs:
             exit 1
           fi
           
-          echo "TAG_NAME=&TAG_NAME" >> $GITHUB_ENV
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
 
       - name: Create GitHub Tag and Release2
         run: |
