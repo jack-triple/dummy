@@ -67,10 +67,12 @@ jobs:
       - name: Create GitHub Tag and Release3
         run: |
           git tag $TAG_NAME
-          git push origin $TAG_NAME
           
           if [ "${{ github.event.inputs.environment }}" == 'production' ]; then
+            git push origin $TAG_NAME
             gh release create $TAG_NAME -t "$TAG_NAME" -n "Release notes for $TAG_NAME"
+          else
+            git push origin "$TAG_NAME" --force 
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
