@@ -76,3 +76,8 @@ jobs:
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test
+        run: |
+          echo "event head : ${{ github.event.head }}"
+
