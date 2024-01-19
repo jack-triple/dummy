@@ -62,9 +62,14 @@ jobs:
         run: |
           echo "TAG_NAME: $TAG_NAME"
 
+      - name: Create GitHub Tag and Release3
+        run: |
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+          
+          if [ "${{ github.event.inputs.environment }}" == 'production' ]; then
+            # Create GitHub Release only for production and dev environments
+            gh release create $TAG_NAME -t "$TAG_NAME" -n "Release notes for $TAG_NAME" 
+          fi 
   
           
-           
-
-
-
