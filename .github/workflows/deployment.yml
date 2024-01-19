@@ -51,7 +51,7 @@ jobs:
           elif [ "${{ github.event.inputs.environment }}" == 'staging' ]; then
             TAG_NAME="release-staging"
           elif [ "${{ github.event.inputs.environment }}" == 'production' ]; then
-            TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            TIMESTAMP=$(date -u "+v%Y%m%d%H%M%S%Z")
             TAG_NAME="release-prod-$TIMESTAMP"
           else
             echo "Invalid environment specified."
