@@ -54,7 +54,7 @@ jobs:
           elif [ "$ENVIRONMENT" == 'staging' ]; then
             TAG_NAME="release-staging"
           elif [ "$ENVIRONMENT" == 'production' ]; then
-            TIMESTAMP=$(date -u "Y%m%d%H%M%S%Z")
+            TIMESTAMP=$(date -u "+%Y%m%d%H%M%S%Z")
             TAG_NAME="release-prod-v$TIMESTAMP"
           else
             echo "Invalid environment specified."
