@@ -88,6 +88,7 @@ jobs:
 
   channel:
     needs: deploy
+    runs-on: ubuntu-latest
     steps:
       - name: Create GitHub Tag and Release2
         run: |
