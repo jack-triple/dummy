@@ -92,7 +92,9 @@ jobs:
     steps:
       - name: Create GitHub Tag and Release2
         run: |
-          echo "inputs.channel_type: $inputs.channel_type"
+          echo "inputs.channel_type: ${{ github.event.inputs.channel_type }}"
+          echo "inputs.channel_type: ${{ inputs.channel_type }}"
+
 #    if: ${{ inputs.channel_type }} == 'CHANNEL_A'
 #    run: |
 #      echo " : ${{ inputs.channel_type }}"
