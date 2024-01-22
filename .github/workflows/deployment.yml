@@ -90,12 +90,10 @@ jobs:
     needs: deploy
     if: ${{ github.event.inputs.channel_type == 'CHANNEL_A'}}
     uses: ./.github/workflows/channel_a.yaml
-    with:
-      environment: ${{ inputs.environment }}
 
   deploy_channel_b:
     needs: deploy
     if: ${{ github.event.inputs.channel_type == 'CHANNEL_B'}}
     uses: ./.github/workflows/channel_b.yml
-    with:
-      environment: ${{ inputs.environment }}
+
+

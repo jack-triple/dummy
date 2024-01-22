@@ -2,11 +2,7 @@ name: CHANNEL_A_DEPLOY
 
 on: 
   workflow_call:
-    inputs:
-      environment:
-        description: '배포 환경'
-        required: true
-        type: string
+
 jobs:
   release:
     name: Deploy_A_TEST
