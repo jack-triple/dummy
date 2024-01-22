@@ -88,7 +88,7 @@ jobs:
 
       - name: Deploy Channel A
 #        if: ${{ github.event.inputs.channel_type }} == 'CHANNEL_A'
-        uses: ./.github/workflows/channel_a.yaml
+        uses: ./.github/workflows/channel_a.yaml@main
         with:
           channel_type: ${{ github.event.inputs.channel_type}}
 #      - name: Deploy Channel B
