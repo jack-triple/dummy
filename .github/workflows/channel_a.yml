@@ -9,7 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-       - name: deploy test
-         run: |
-           echo "CHANNEL_TYPE: $CHANNEL_TYPE"
-           echo "Environment: $ENVIRONMENT"
+      - name: deploy test1
+        uses: actions/checkout@v3
+
+      - name: deploy test
+        run: |
+          echo "CHANNEL_TYPE: $CHANNEL_TYPE"
+          echo "Environment: $ENVIRONMENT"
