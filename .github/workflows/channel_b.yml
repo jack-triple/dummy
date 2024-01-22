@@ -9,19 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-       - name: deploy test1
-         uses: actions/checkout@v3
-       
-       - name: Checkout latest release tag
-         run: |
-            LATEST_TAG=$(git describe --tags --abbrev=0 --match staging-*)
-            
-            echo '$LATEST_TAG'
-            
-       - name: deploy test2
-         run: |
-           echo "CHANNEL_TYPE: $CHANNEL_TYPE"
-           echo "Environment: $ENVIRONMENT"
-         env:
-           CHANNEL_TYPE: ${{ inputs.channel_type }}
-           ENVIRONMENT: ${{ inputs.environment }}
+      - name: deploy test
+        run: |
+          echo "CHANNEL_TYPE: $CHANNEL_TYPE"
+          echo "Environment: $ENVIRONMENT"
