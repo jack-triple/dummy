@@ -3,10 +3,6 @@ name: CHANNEL_A_DEPLOY
 on: 
   workflow_call:
     inputs:
-      channel_type:
-        description: '배포 채널'
-        type: string
-        required: true
       environment:
         description: '배포 환경'
         required: true
