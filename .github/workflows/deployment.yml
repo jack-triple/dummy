@@ -87,9 +87,9 @@ jobs:
           echo "TAG_NAME=$TAG_NAME"
 
       - name: Deploy Channel A
-        if: $CHANNEL == 'CHANNEL_A'
+        if: ${{ github.event.inputs.channel_type }} == 'CHANNEL_A'
         uses: ./.github/workflows/channel_a.yml
 
       - name: Deploy Channel B
-        if: $CHANNEL == 'CHANNEL_B'
+        if: ${{ github.event.inputs.channel_type }} == 'CHANNEL_B'
         uses: ./.github/workflows/channel_b.yml
