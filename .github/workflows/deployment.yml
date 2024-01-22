@@ -85,11 +85,8 @@ jobs:
           echo "ref_name : $GITHUB_REF_NAME"
           echo "SHORT_SHA=${GITHUB_SHA:0:6}"
           echo "TAG_NAME=$TAG_NAME"
+
   channel:
     needs: deploy
+    if: ${{ inputs.channel_type }} == 'CHANNEL_A'
     uses: ./.github/workflows/channel_a.yaml
-    with:
-      channel_type: ${{ github.event.inputs.channel_type}}
-#      - name: Deploy Channel B
-#        if: ${{ github.event.inputs.channel_type }} == 'CHANNEL_B'
-#        uses: ./.github/workflows/channel_b.yml
