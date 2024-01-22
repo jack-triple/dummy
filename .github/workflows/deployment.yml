@@ -90,8 +90,6 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     if: ${{ github.event.inputs.channel_type }} == 'CHANNEL_A'
-    run: |
-      echo " : ${{ inputs.channel_type }}"
     uses: ./.github/workflows/channel_a.yaml
 #    steps:
 #    - name: CHANNEL_A를 위한 워크플로우 실행
