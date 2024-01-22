@@ -90,10 +90,12 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Create GitHub Tag and Release2
-        run: |
-          echo "inputs.channel_type: ${{ github.event.inputs.channel_type }}"
-          echo "inputs.channel_type: ${{ inputs.channel_type }}"
+    - name: CHANNEL_A를 위한 워크플로우 실행
+      if: ${{ github.event.inputs.channel_type == 'CHANNEL_A' }}
+      run: |
+          echo "CHANNEL_A를 위한 워크플로우 실행"
+          # CHANNEL_A에 특화된 단계 또는 명령어를 추가
+          ./.github/workflows/channel_a.yaml
 
 #    if: ${{ inputs.channel_type }} == 'CHANNEL_A'
 #    run: |
