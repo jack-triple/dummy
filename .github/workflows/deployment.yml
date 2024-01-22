@@ -89,4 +89,6 @@ jobs:
   channel:
     needs: deploy
     if: ${{ inputs.channel_type }} == 'CHANNEL_A'
-    uses: ./.github/workflows/channel_a.yaml
+    run: |
+      echo "channel_type : ${{ inputs.channel_type }}"
+#    uses: ./.github/workflows/channel_a.yaml
