@@ -96,6 +96,6 @@ jobs:
   deploy_channel_b:
     needs: deploy
     if: ${{ github.event.inputs.channel_type == 'CHANNEL_B'}}
-    uses: ./.github/workflows/channel_b.yaml
+    uses: ./.github/workflows/channel_b.yml
     with:
       channel_type: ${{ inputs.environment }}
