@@ -1,0 +1,75 @@
+name: CREATE_RELEASE
+
+on: 
+  workflow_call:
+
+jobs:
+  create-release:
+    name: create-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Environment Validation
+        run: |
+          CHANNEL="${{ github.event.inputs.channel_type }}"                                
+          ENVIRONMENT="${{ github.event.inputs.environment }}"                             
+
+          if [ "$ENVIRONMENT" == "qa" ] && [ "$CHANNEL" == "CHANNEL_A" ]; then             
+            echo "Invalid combination: CHANNEL_A cannot use QA environment."               
+            exit 1                                                                         
+          fi                                                                               
+
+          if [ "$ENVIRONMENT" == "staging" ] && [ "$CHANNEL" == "CHANNEL_B" ]; then        
+            echo "Invalid combination: CHANNEL_B cannot use Staging environment."          
+            exit 1                                                                         
+          fi                                                                               
+
+           echo "CHANNEL=$CHANNEL" >> $GITHUB_ENV                                          
+           echo "ENVIRONMENT=$ENVIRONMENT" >> $GITHUB_ENV
+
+      - name: Create GitHub Tag and Release
+        run: |
+          if [ "$ENVIRONMENT" == 'development' ]; then                                     
+            TAG_NAME="release-dev"                                                         
+          elif [ "$ENVIRONMENT" == 'qa' ]; then                                            
+            TAG_NAME="release-qa"                                                          
+          elif [ "$ENVIRONMENT" == 'staging' ]; then                                       
+            TAG_NAME="release-staging"                                                     
+          elif [ "$ENVIRONMENT" == 'production' ]; then                                    
+            TIMESTAMP=$(date -u "+%Y%m%d%H%M%S%Z")                                         
+            TAG_NAME="release-prod-v$TIMESTAMP"                                            
+          else                                                                             
+            echo "Invalid environment specified."                                          
+            exit 1                                                                         
+          fi                                                                               
+          
+          if [ "$CHANNEL" == "CHANNEL_B" ]; then        
+            TAG_NAME="tour-$TAG_NAME" 
+          fi          
+      
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+
+      - name: Create GitHub Tag and Release2
+        run: |
+          echo "TAG_NAME: $TAG_NAME"
+
+      - name: Create GitHub Tag and Release3
+        run: |
+          git tag $TAG_NAME                                                                
+
+          if [ "$ENVIRONMENT" == 'production' ]; then                                      
+            git push origin $TAG_NAME                                                      
+            gh release create $TAG_NAME -t "$TAG_NAME" -n "Release notes for $TAG_NAME"    
+          else                                                                             
+            git push origin "$TAG_NAME" --force                                            
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test
+        run: |
+          echo "ref_name : $GITHUB_REF_NAME"                                               
+          echo "SHORT_SHA=${GITHUB_SHA:0:6}"                                               
+          echo "TAG_NAME=$TAG_NAME"

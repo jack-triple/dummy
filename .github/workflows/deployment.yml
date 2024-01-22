@@ -22,7 +22,7 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/create_release.yaml
+    uses: ./.github/workflows/create_release.yml
 
   deply_channel_a:
     needs: deploy
