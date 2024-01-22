@@ -2,7 +2,14 @@ name: CHANNEL_B_DEPLOY
 
 on: 
   workflow_call:
-
+    inputs:
+      channel_type:
+        description: '배포 채널'
+        type: string
+        required: true
+      environment:
+        description: '배포 환경'
+        required: true
 jobs:
   release:
     name: Deploy_B_TEST
@@ -11,5 +18,5 @@ jobs:
     steps:
       - name: deploy test
         run: |
-          echo "CHANNEL_TYPE: $CHANNEL_TYPE"
-          echo "Environment: $ENVIRONMENT"
+          echo "CHANNEL_TYPE: ${{ github.event.inputs.channel_type }}"
+          echo "Environment: ${{ github.event.inputs.environment }}"

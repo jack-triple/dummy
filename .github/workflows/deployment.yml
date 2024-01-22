@@ -86,19 +86,16 @@ jobs:
           echo "SHORT_SHA=${GITHUB_SHA:0:6}"
           echo "TAG_NAME=$TAG_NAME"
 
-  channel:
+  deply_channel_a:
     needs: deploy
     if: ${{ github.event.inputs.channel_type == 'CHANNEL_A'}}
     uses: ./.github/workflows/channel_a.yaml
-#    steps:
-#    - name: CHANNEL_A를 위한 워크플로우 실행
-#      if: ${{ github.event.inputs.channel_type == 'CHANNEL_A' }}
-#      run: |
-#          echo "CHANNEL_A를 위한 워크플로우 실행"
-#          # CHANNEL_A에 특화된 단계 또는 명령어를 추가
-#          ./.github/workflows/channel_a.yaml
+    with:
+      channel_type: ${{ inputs.environment }}
 
-#    if: ${{ inputs.channel_type }} == 'CHANNEL_A'
-#    run: |
-#      echo " : ${{ inputs.channel_type }}"
-#    uses: ./.github/workflows/channel_a.yaml
+  deploy_channel_b:
+    needs: deploy
+    if: ${{ github.event.inputs.channel_type == 'CHANNEL_B'}}
+    uses: ./.github/workflows/channel_b.yaml
+    with:
+      channel_type: ${{ inputs.environment }}
