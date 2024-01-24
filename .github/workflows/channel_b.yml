@@ -9,9 +9,8 @@ on:
         type: string
       secrets:
         READ_ONLY_NPM_TOKEN:
-          required: true
-        OPS_API_KEY:
-          required: true
+          required: false
+
 
 jobs:
   release:
