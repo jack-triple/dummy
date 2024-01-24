@@ -2,11 +2,16 @@ name: CREATE_RELEASE
 
 on: 
   workflow_call:
-
+    outputs:
+      release-tag:
+        description: "Release Tag"
+        value: ${{ jobs.create-release.outputs.release-tag }}
 jobs:
   create-release:
     name: create-release
     runs-on: ubuntu-latest
+    outputs:
+      release-tag: ${{ steps.create-tag-name.outputs.tag_name }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -52,8 +57,10 @@ jobs:
           echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
 
       - name: Create GitHub Tag and Release2
+        id: create-tag-name
         run: |
           echo "TAG_NAME: $TAG_NAME"
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Tag and Release3
         run: |

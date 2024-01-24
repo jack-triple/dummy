@@ -24,14 +24,33 @@ jobs:
   deploy:
     uses: ./.github/workflows/create_release.yml
 
+  log:
+    needs: create-release-tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: logging
+        run: |
+          echo "release-tag: ${{ needs.create-release-tag.outputs.release-tag }}"
+
   deply_channel_a:
     needs: deploy
     if: ${{ github.event.inputs.channel_type == 'CHANNEL_A'}}
     uses: ./.github/workflows/channel_a.yaml
+  with:
+    release-tag: ${{ needs.create-release-tag.outputs.release-tag }}
 
   deploy_channel_b:
     needs: deploy
     if: ${{ github.event.inputs.channel_type == 'CHANNEL_B'}}
     uses: ./.github/workflows/channel_b.yml
+    with:
+      release-tag: ${{ needs.create-release-tag.outputs.release-tag }}
 
+  log2:
+    needs: create-release-tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: logging
+        run: |
+          echo "release-tag: ${{ needs.create-release-tag.outputs.release-tag }}"
 
