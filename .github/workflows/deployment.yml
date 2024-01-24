@@ -25,12 +25,12 @@ jobs:
     uses: ./.github/workflows/create_release.yml
 
   log:
-    needs: create-release-tag
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
       - name: logging
         run: |
-          echo "release-tag: ${{ needs.create-release-tag.outputs.release-tag }}"
+          echo "release-tag: ${{ needs.deploy.outputs.release-tag }}"
 
   deply_channel_a:
     needs: deploy
@@ -47,10 +47,10 @@ jobs:
       release-tag: ${{ needs.create-release-tag.outputs.release-tag }}
 
   log2:
-    needs: create-release-tag
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
       - name: logging
         run: |
-          echo "release-tag: ${{ needs.create-release-tag.outputs.release-tag }}"
+          echo "release-tag: ${{ needs.deploy.outputs.release-tag }}"
 
