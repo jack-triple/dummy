@@ -38,7 +38,6 @@ jobs:
     uses: ./.github/workflows/channel_a.yaml
     with:
       release-tag: ${{ needs.deploy.outputs.release-tag }}
-    secrets: inherit
 
   deploy_channel_b:
     needs: deploy
@@ -46,7 +45,6 @@ jobs:
     uses: ./.github/workflows/channel_b.yml
     with:
       release-tag: ${{ needs.deploy.outputs.release-tag }}
-    secrets: inherit
 
   log2:
     needs: deploy
