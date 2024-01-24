@@ -11,7 +11,8 @@ jobs:
   release:
     name: Deploy_B_TEST
     runs-on: ubuntu-latest
-    environment: ${{ inputs.tag }}
+    tag: ${{ inputs.tag }}
+
     steps:
       - name: deploy test
         run: |
