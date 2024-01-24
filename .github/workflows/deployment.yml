@@ -38,7 +38,6 @@ jobs:
     uses: ./.github/workflows/channel_a.yaml
     with:
       tag: ${{ needs.deploy.outputs.release-tag }}
-      username: "test"
 
   deploy_channel_b:
     needs: deploy
@@ -46,7 +45,6 @@ jobs:
     uses: ./.github/workflows/channel_b.yml
     with:
       tag: ${{ needs.deploy.outputs.release-tag }}
-      username: "test"
 
   log2:
     needs: deploy
