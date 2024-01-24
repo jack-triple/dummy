@@ -17,4 +17,4 @@ jobs:
         run: |
           echo "CHANNEL_TYPE: ${{ github.event.inputs.channel_type }}"
           echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "test: ${{ inputs.tag }}"
+          echo "test: ${{ github.event.inputs.tag }}"
