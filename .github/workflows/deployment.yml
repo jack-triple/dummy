@@ -36,8 +36,8 @@ jobs:
     needs: deploy
     if: ${{ github.event.inputs.channel_type == 'CHANNEL_A'}}
     uses: ./.github/workflows/channel_a.yaml
-  with:
-    release-tag: ${{ needs.create-release-tag.outputs.release-tag }}
+    with:
+      release-tag: ${{ needs.create-release-tag.outputs.release-tag }}
 
   deploy_channel_b:
     needs: deploy
