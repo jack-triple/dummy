@@ -11,10 +11,10 @@ jobs:
   release:
     name: Deploy_A_TEST
     runs-on: ubuntu-latest
-    
+    environment: ${{ inputs.tag }}
     steps:
-      - name: deploy test
-        run: |
-          echo "CHANNEL_TYPE: ${{ github.event.inputs.channel_type }}"
-          echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "test: ${{ github.event.inputs.tag }}"
+    - name: deploy test
+      run: |
+        echo "CHANNEL_TYPE: ${{ github.event.inputs.channel_type }}"
+        echo "Environment: ${{ github.event.inputs.environment }}"
+        echo "test: ${{ tag }}"
