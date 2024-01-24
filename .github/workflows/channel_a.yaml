@@ -6,16 +6,21 @@ on:
       tag:
         required: true
         type: string
+    username:
+      description: 'A username passed from the caller workflow'
+      required: true
+      type: string
+
 
 jobs:
   release:
     name: Deploy_A_TEST
     runs-on: ubuntu-latest
-    tag: ${{ inputs.tag }}
 
     steps:
     - name: deploy test
       run: |
         echo "CHANNEL_TYPE: ${{ github.event.inputs.channel_type }}"
         echo "Environment: ${{ github.event.inputs.environment }}"
-        echo "test: $tag"
+        echo "test: ${{ inputs.tag }}"
+        echo "test2: ${{ inputs.username }}"
