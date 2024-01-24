@@ -3,7 +3,7 @@ name: CHANNEL_B_DEPLOY
 on: 
   workflow_call:
     inputs:
-      release-tag:
+      tag:
         required: true
         type: string
 
@@ -17,4 +17,4 @@ jobs:
         run: |
           echo "CHANNEL_TYPE: ${{ github.event.inputs.channel_type }}"
           echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "test: ${{ inputs.release-tag }}"
+          echo "test: ${{ inputs.tag }}"
