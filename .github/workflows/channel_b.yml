@@ -7,10 +7,10 @@ on:
         description: "Release Tag"
         required: true
         type: string
-      secrets:
-        READ_ONLY_NPM_TOKEN:
-          required: false
-          type: string
+    secrets:
+      READ_ONLY_NPM_TOKEN:
+        required: false
+        type: string
 
 
 jobs:
